@@ -9,7 +9,7 @@ if "%GRAALVM_HOME%"=="" (
 )
 
 if "%BABASHKA_XMX%"=="" (
-    set BABASHKA_XMX="-J-Xmx4500m"
+    set BABASHKA_XMX="-J-Xmx4500m -Dfile.encoding=UTF-8"
 )
 
 set JAVA_HOME=%GRAALVM_HOME%
@@ -24,6 +24,7 @@ Rem -H:EnableURLProtocols=jar,http,https is also not supported.
 call %GRAALVM_HOME%\bin\gu.cmd install native-image
 
 call %GRAALVM_HOME%\bin\native-image.cmd ^
+  "-Dfile.encoding=UTF-8"
   "-jar" "target/babashka-%BABASHKA_VERSION%-standalone.jar" ^
   "-H:Name=bb" ^
   "-H:+ReportExceptionStackTraces" ^
